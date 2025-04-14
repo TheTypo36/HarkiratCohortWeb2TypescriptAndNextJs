@@ -1,1 +1,1 @@
-{"root":["./src/demointerface.ts","./src/index.ts","./src/types.ts"],"version":"5.8.3"}
+{"root":["./src/array.ts","./src/demointerface.ts","./src/index.ts","./src/interfacevstypes.ts","./src/types.ts"],"version":"5.8.3"}
