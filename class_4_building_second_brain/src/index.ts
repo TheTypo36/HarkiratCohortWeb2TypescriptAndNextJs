@@ -1,6 +1,6 @@
 import express, { json, urlencoded } from "express";
 import cors from "cors";
-import { DbConnect } from "./src/Db/index.js";
+import { DbConnect } from "./Db/index.ts";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -21,9 +21,12 @@ DbConnect().then(() => {
 app.get("/", (req, res) => {
   res.send("<h1> hello world </h1>");
 });
-// app.use("/api/v1/register", register);
-// app.use("/api/v1/sigIn", signIn);
-// app.use("/api/v1/signOut", signOut);
+
+import userRouter from "./Routes/userRouter.ts";
+import contentRouter from "./Routes/contentRouter.ts";
+app.use("/api/v1/user", userRouter);
+
+app.use("/api/v1/content", contentRouter);
 
 app.listen(port, () => {
   console.log("server is running on port", port);
