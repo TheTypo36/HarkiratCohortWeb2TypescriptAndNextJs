@@ -5,7 +5,7 @@ const DbConnect = async () => {
     const connection = await mongoose.connect(
       `${process.env.DbUrl}/BuildingSecondBrain`
     );
-    console.log("we are connected to db", connection);
+    console.log("we are connected to db", connection.Collection);
   } catch (error) {
     throw error;
   }
