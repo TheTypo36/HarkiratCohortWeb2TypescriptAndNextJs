@@ -54,3 +54,43 @@ export const createContent = async (req: NewRequest, res: Response) => {
     throw new Error("internal server error");
   }
 };
+
+export const getContent = async (req: NewRequest, res: Response) => {
+  try {
+    const userId = req.user?._id;
+    const content = await Content.find({
+      userId: userId,
+    }).populate("userId", "username");
+
+    res.status(202).json({
+      content,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export const deleteContent = async (req: NewRequest, res: Response) => {
+  try {
+    const contentId = req.body.contentId;
+    const userId = req.user?._id;
+    console.log("req user in delete content", req.user);
+    const result = await Content.deleteMany({
+      _id: contentId,
+      userId: userId,
+    });
+
+    if (result.deletedCount === 0) {
+      res.status(400).json({
+        message: "error in deleting ",
+      });
+    }
+    res.status(200).json({
+      message: "deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "internal server error" });
+  }
+};
