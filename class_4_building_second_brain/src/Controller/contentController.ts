@@ -3,6 +3,9 @@ import { Content } from "../Models/contentSchema";
 import { Response } from "express";
 import { Tag, TagDocument } from "../Models/tagSchema";
 import { Model } from "mongoose";
+import { User } from "../Models/userSchema";
+import { Link } from "../Models/linkSchema";
+import { random } from "../utils";
 
 export const createContent = async (req: NewRequest, res: Response) => {
   try {
@@ -93,4 +96,65 @@ export const deleteContent = async (req: NewRequest, res: Response) => {
     console.log(error);
     res.status(500).json({ message: "internal server error" });
   }
+};
+
+export const shareContent = async (req: NewRequest, res: Response) => {
+  const user = req.user;
+  console.log(req.body);
+  const share = req.body.share;
+
+  if (share == true) {
+    const existingLink = await Link.findOne({
+      userId: user?._id,
+    });
+    if (existingLink) {
+      const hash = existingLink.hash;
+      res
+        .status(200)
+        .json({ link: `/share/${hash}`, message: "link already existed" });
+      return;
+    }
+    const link = await Link.create({
+      userId: user?._id,
+      hash: random(10),
+    });
+    res.json({
+      link: `/share/${link.hash}`,
+      message: "created sharable link",
+    });
+  } else {
+    console.log("here");
+    await Link.deleteOne({
+      userId: user?._id,
+    });
+
+    res.json({
+      message: "removed sharable link",
+    });
+  }
+};
+export const shareableLink = async (req: NewRequest, res: Response) => {
+  const hash = req.params.sharelink;
+  console.log(req.params);
+  const link = await Link.findOne({
+    hash,
+  });
+
+  if (!link) {
+    res.status(411).json({
+      message: "sorry incorrect input",
+    });
+    return;
+  }
+
+  const content = await Content.find({
+    userId: link.userId,
+  });
+
+  const user = await User.findById(link.userId);
+
+  res.json({
+    username: user?.username,
+    content: content,
+  });
 };

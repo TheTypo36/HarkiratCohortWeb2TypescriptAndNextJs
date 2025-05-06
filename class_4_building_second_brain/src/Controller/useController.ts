@@ -34,11 +34,12 @@ export const register = async (req: Request, res: Response) => {
 
   try {
     const existingUser = User.findOne({
-      $or: [{ email }, { username }],
+      email,
     });
 
     if (existingUser != null) {
       res.status(400).json({ message: "user already exists" });
+      return;
     }
     const user = await User.create({
       username: username,

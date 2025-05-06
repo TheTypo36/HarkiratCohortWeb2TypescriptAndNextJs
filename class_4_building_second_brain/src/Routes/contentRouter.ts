@@ -4,6 +4,8 @@ import {
   createContent,
   deleteContent,
   getContent,
+  shareableLink,
+  shareContent,
 } from "../Controller/contentController";
 import multer from "multer";
 
@@ -21,4 +23,6 @@ router
   .route("/delete-content")
   .delete(verifyJwt as RequestHandler, deleteContent);
 
+router.route("/share").post(verifyJwt as RequestHandler, shareContent);
+router.route("/:sharelink").get(shareableLink);
 export default router;

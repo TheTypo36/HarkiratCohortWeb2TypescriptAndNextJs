@@ -10,16 +10,16 @@ export interface ButtonProps {
 }
 
 export const variant = {
-  primary: "bg-purple-600 text-white flex",
+  primary: "bg-purple-600 text-white",
   secondary: "bg-purple-300 text-purple-600",
 };
 
-const defaultStyles = "rounded-md p-4";
+const defaultStyles = "rounded-md p-4 flex";
 
 const sizeStyles = {
-  sm: "py-1 px-2",
-  md: "py-2 px-4",
-  lg: "py-4 px-6",
+  sm: "py-1 px-2 text-xl",
+  md: "py-2 px-4 text-md",
+  lg: "py-4 px-6 text-sm",
 };
 function Button(props: ButtonProps) {
   return (

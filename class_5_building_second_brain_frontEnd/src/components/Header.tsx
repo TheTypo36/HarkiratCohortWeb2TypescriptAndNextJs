@@ -1,11 +1,12 @@
 import { PlusIcon } from "../icons/PlusIcon";
+import { ShareIcon } from "../icons/ShareIcon";
 import Button from "./ui/Button";
 function Header() {
   return (
     <header>
       Header
       <Button
-        startIcon={<PlusIcon />}
+        startIcon={<PlusIcon size={"lg"} />}
         variant="primary"
         size="md"
         handler={() => {}}
@@ -14,6 +15,7 @@ function Header() {
       <Button
         variant="secondary"
         size="md"
+        startIcon={<ShareIcon size={"lg"} />}
         handler={() => {}}
         text={"add content"}
       ></Button>
