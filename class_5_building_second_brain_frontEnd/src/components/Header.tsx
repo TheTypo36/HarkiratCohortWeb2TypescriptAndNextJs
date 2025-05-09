@@ -3,19 +3,18 @@ import { ShareIcon } from "../icons/ShareIcon";
 import Button from "./ui/Button";
 function Header() {
   return (
-    <header>
-      Header
+    <header className="h-20 bg-slate-300 flex items-center justify-end">
       <Button
-        startIcon={<PlusIcon size={"lg"} />}
-        variant="primary"
-        size="md"
-        handler={() => {}}
-        text={"share"}
-      ></Button>
-      <Button
+        startIcon={<ShareIcon size={"lg"} />}
         variant="secondary"
         size="md"
-        startIcon={<ShareIcon size={"lg"} />}
+        handler={() => {}}
+        text={"share brain"}
+      ></Button>
+      <Button
+        variant="primary"
+        size="md"
+        startIcon={<PlusIcon size={"lg"} />}
         handler={() => {}}
         text={"add content"}
       ></Button>
