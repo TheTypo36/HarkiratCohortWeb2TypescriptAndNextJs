@@ -1,20 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "../signIn/page";
+import Input from "@/app/components/Input";
 import axios from "axios";
 
 function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleSignUp = () => {
-    axios.post("https://localhost:300/api/v1/signup", {
+    axios.post("http://localhost:3000/api/v1/signup", {
       username,
       password,
     });
   };
   return (
-    <div className="h-60 w-80 bg-gray-500 border-0 rounded-md flex-col ite-center p-4 justify-center items-baseline">
+    <div className="h-60 w-80 bg-gray-500 border-0 rounded-md flex-col items-center p-4 justify-center">
       <h2>SignUp</h2>
       <Input
         type="email"
@@ -31,7 +31,7 @@ function SignUp() {
         placeholder="enter the password"
       />
       <button
-        className="b-2 bg-green-500 p-2 rounded-md"
+        className="border-2 bg-green-500 p-2 rounded-md"
         onClick={handleSignUp}
       >
         SignUp

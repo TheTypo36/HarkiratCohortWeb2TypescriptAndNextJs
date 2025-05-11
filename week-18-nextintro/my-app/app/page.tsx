@@ -1,6 +1,7 @@
+"use client";
 import Link from "next/link";
 
-async function page() {
+function Page() {
   return (
     <div className="flex flex-col justify-center h-full items-center text-2xl">
       Todo Application
@@ -10,4 +11,4 @@ async function page() {
   );
 }
 
-export default page;
+export default Page;
